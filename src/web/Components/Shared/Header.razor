@@ -1,0 +1,30 @@
+@using Microsoft.Learn.AzureCosmosDBMongoDBVCoreQuickstart.Web.Components.Shared.Icons
+@inject IOptions<Settings> settingsOptions
+
+<header class="bg-gray-800 shadow-md p-4">
+    <h1
+        class="text-2xl font-extralight text-white text-center fill-white uppercase align-middle flex items-center justify-center">
+        <div class="mr-4">
+            <ServiceIcon />
+        </div>
+        <span class="hidden md:inline">
+            Product
+        </span>
+        &nbsp;
+        <span>
+            Dashboard
+        </span>
+        @if (!string.IsNullOrEmpty(settingsOptions.Value?.HeaderSuffix))
+        {
+            <span>
+                &nbsp;
+            </span>
+            <span class="hidden md:inline">
+                - @settingsOptions.Value.HeaderSuffix
+            </span>
+        }
+        <div class="ml-4 hidden">
+            <ServiceIcon />
+        </div>
+    </h1>
+</header>

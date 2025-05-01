@@ -1,0 +1,6 @@
+# Tailwind NPM packages
+package.json
+package-lock.json
+
+# Node modules
+node_modules/

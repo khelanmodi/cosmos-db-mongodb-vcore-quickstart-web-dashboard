@@ -1,0 +1,50 @@
+name: Deploy Docker container image to GitHub Container Registry
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_TAGS: 'latest;${{ github.ref_name }};${{ github.sha }}'
+jobs:
+  build-and-push-image:
+    name: Build and push Docker container image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+          dotnet-quality: 'preview'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - name: Configure Tailwind CSS
+        run: |
+          npm install tailwindcss @tailwindcss/cli
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish Docker container image
+        id: publish-image
+        working-directory: src/web/
+        env:
+          ContainerImageTags: ${{ env.IMAGE_TAGS }}
+        run: |
+          dotnet publish --os linux --arch x64 --configuration release \
+            -p:PublishProfile=DefaultContainer \
+            -p:ContainerRegistry=${{ env.REGISTRY }} \
+            -p:ContainerRepository=${{ env.IMAGE_NAME }}

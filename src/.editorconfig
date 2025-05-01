@@ -1,0 +1,18 @@
+# Target all C# files in the project
+[*.cs]
+
+# C# style settings
+csharp_style_namespace_declarations = file_scoped
+csharp_style_expression_bodied_methods = when_on_single_line
+
+# .NET style settings
+dotnet_style_prefer_global_using_directive = true:suggestion
+
+# IDE0058: Remove unnecessary expression value
+dotnet_diagnostic.IDE0058.severity = none
+
+# Target the top-level statements in the project
+[Program.cs]
+
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none
