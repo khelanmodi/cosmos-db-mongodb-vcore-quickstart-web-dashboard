@@ -1,6 +1,6 @@
-# Azure Cosmos DB for MongoDB vCore dashboard
+# Azure DocumentDB (with MongoDB compatibility) dashboard
 
-This repository contains the source code for the Azure Cosmos DB for MongoDB vCore dashboard web application used in various Quickstart Azure Developer CLI (AZD) templates for [Microsoft Learn](https://learn.microsoft.com/azure/cosmos-db/mongodb/vcore).
+This repository contains the source code for the Azure DocumentDB dashboard web application used in various Quickstart Azure Developer CLI (AZD) templates for [Microsoft Learn](https://learn.microsoft.com/azure/cosmos-db/mongodb/vcore).
 
 ![Screenshot of the running web application.](assets/web.png)
 
